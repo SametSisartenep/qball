@@ -191,7 +191,7 @@ redraw(void)
 		n = normvec3(crossvec(
 			subvec3(trans.p1, trans.p0),
 			subvec3(trans.p2, trans.p0)));
-		if(dotvec3(n, subvec3(trans.p0, Vec3(0, 0, 0))) < 0){
+		if(dotvec3(n, trans.p0) < 0){
 			trans.p0 = mulvecm(trans.p0, proj);
 			trans.p1 = mulvecm(trans.p1, proj);
 			trans.p2 = mulvecm(trans.p2, proj);

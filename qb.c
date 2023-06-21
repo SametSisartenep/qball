@@ -48,29 +48,30 @@ mouseq(Point2 p, Quaternion *axis){
 
 	if(rsq > 1){
 		rsq = sqrt(rsq);
-		q.k = 0;
+		q.r = 0;
 		q.i = p.x/rsq;
 		q.j = p.y/rsq;
-		q.r = 0;
-	}
-	else{
+		q.k = 0;
+	}else{
 		q.r = 0;
 		q.i = p.x;
 		q.j = p.y;
 		q.k = sqrt(1 - rsq);
 	}
+
 	if(axis != nil){
-		l    = q.i*axis->i + q.j*axis->j + q.k*axis->k;
+		l    = dotq(q, *axis);
 		q.i -= l*axis->i;
 		q.j -= l*axis->j;
 		q.k -= l*axis->k;
-		l    = sqrt(q.i*q.i + q.j*q.j + q.k*q.k);
-		if(l != 0.){
+		l    = qlen(q);
+		if(l != 0){
 			q.i /= l;
 			q.j /= l;
 			q.k /= l;
 		}
 	}
+
 	return q;
 }
 
